@@ -16,38 +16,74 @@
         body { margin: 0; font-family: 'Noto Sans TC', sans-serif; background: var(--奶油白); color: var(--焦糖棕); overflow-x: hidden; }
         
         .brand-bar { background: linear-gradient(90deg, #f39c12, #e67e22); color: white; text-align: center; padding: 12px; font-size: 0.9rem; font-weight: bold; }
-        
         nav { position: sticky; top: 0; width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 15px 8%; background: var(--玻璃白); backdrop-filter: blur(15px); z-index: 1000; border-bottom: 2px solid rgba(243, 156, 18, 0.2); }
         .logo-group { display: flex; align-items: center; gap: 12px; }
         .logo-circle { width: 45px; height: 45px; background: var(--楓糖金); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; transform: rotate(-5deg); }
-        
-        /* 右上角雙按鈕樣式 */
-        .nav-btns { display: flex; gap: 8px; align-items: center; }
-        .btn { padding: 8px 14px; border-radius: 10px; font-size: 0.8rem; text-decoration: none; font-weight: bold; transition: 0.3s; white-space: nowrap; }
+        .nav-btns { display: flex; gap: 8px; }
+        .btn { padding: 8px 14px; border-radius: 10px; font-size: 0.85rem; text-decoration: none; font-weight: bold; transition: 0.3s; white-space: nowrap; }
         .btn-outline { border: 2px solid var(--楓糖金); color: var(--楓糖金); }
         .btn-solid { background: var(--楓糖金); color: white; box-shadow: 0 4px 12px rgba(243, 156, 18, 0.2); }
-        .btn:hover { transform: translateY(-2px); opacity: 0.8; }
 
-        section { padding: 60px 8%; }
-        .hero { display: flex; flex-wrap: wrap; gap: 40px; align-items: center; }
-        .hero-text { flex: 1.5; min-width: 320px; }
-        
+        section { padding: 80px 8%; }
+        .section-tag { color: var(--楓糖金); font-weight: 900; letter-spacing: 2px; display: block; margin-bottom: 10px; text-align: center; }
+        .section-title { font-size: 2.2rem; text-align: center; margin-bottom: 50px; font-weight: 900; }
+
         .stats-container { display: flex; gap: 15px; margin-top: 30px; }
         .stat-item { background: white; padding: 20px; border-radius: 20px; box-shadow: var(--卡片影); flex: 1; border-bottom: 4px solid var(--楓糖金); }
-        .stat-item span { display: block; font-size: 0.75rem; color: #aaa; margin-bottom: 5px; font-weight: bold; }
-        .stat-item strong { font-size: 1.2rem; color: var(--焦糖棕); }
+        .stat-item strong { font-size: 1.3rem; color: var(--焦糖棕); display: block; margin-top: 5px; }
 
-        .job-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+        .job-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
         .job-card { background: white; padding: 30px; border-radius: 25px; box-shadow: var(--卡片影); text-align: center; transition: 0.3s; }
-        .job-icon { font-size: 2rem; color: var(--楓糖金); margin-bottom: 15px; }
 
-        footer { text-align: center; padding: 40px; background: #2c3e50; color: white; margin-top: 60px; }
-        @media (max-width: 600px) { .stats-container { flex-direction: column; } .nav-btns { gap: 5px; } .btn { padding: 6px 8px; font-size: 0.7rem; } }
+        /* 鬆餅紀念館 2x2 排版 */
+        .gallery-grid { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; /* 強制兩欄 */
+            gap: 40px; 
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .polaroid { 
+            background: white; 
+            padding: 15px 15px 40px 15px; 
+            box-shadow: var(--卡片影); 
+            transition: 0.4s; 
+            border-radius: 2px;
+            position: relative;
+        }
+        /* 稍微交錯傾斜增加隨性感 */
+        .polaroid:nth-child(1) { transform: rotate(-3deg); }
+        .polaroid:nth-child(2) { transform: rotate(2deg); }
+        .polaroid:nth-child(3) { transform: rotate(1.5deg); }
+        .polaroid:nth-child(4) { transform: rotate(-2.5deg); }
+        
+        .polaroid:hover { transform: rotate(0deg) scale(1.08); z-index: 10; box-shadow: 0 25px 50px rgba(0,0,0,0.1); }
+        
+        .img-placeholder { 
+            width: 100%; 
+            aspect-ratio: 4/3; 
+            background: #fdf2e9; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            margin-bottom: 20px; 
+            overflow: hidden; 
+            border: 1px solid #eee;
+        }
+        .img-placeholder img { width: 100%; height: 100%; object-fit: cover; }
+        .polaroid p { margin: 0; font-size: 1rem; text-align: center; color: var(--焦糖棕); font-weight: bold; letter-spacing: 1px; }
+
+        footer { text-align: center; padding: 50px; background: #2c3e50; color: white; }
+        
+        @media (max-width: 650px) { 
+            .gallery-grid { grid-template-columns: 1fr; } /* 手機改為一欄避免太擠 */
+            .stats-container { flex-direction: column; }
+        }
     </style>
 </head>
 <body>
 
-    <div class="brand-bar">📢 🥞 鬆餅之城 RP｜MuffinRP 現正招募中！</div>
+    <div class="brand-bar">📢 🥞 鬆餅之城 RP｜MuffinRP 現正熱烈招募中！</div>
 
     <nav>
         <div class="logo-group">
@@ -55,7 +91,7 @@
             <div><strong>MuffinRP</strong><small style="display: block; color: #888;">品味生活．工業核心</small></div>
         </div>
         <div class="nav-btns">
-            <a href="https://discord.gg/H76k6vXn" class="btn btn-outline">Discord 社群</a>
+            <a href="https://discord.gg/EaDkCGP9bH" class="btn btn-outline">Discord 社群</a>
             <a href="https://cfx.re/join/yg64y5" class="btn btn-solid">一鍵入城</a>
         </div>
     </nav>
@@ -64,29 +100,44 @@
         <div class="hero-text">
             <h1 data-aos="fade-right">寫實與溫度的<br><span style="color:var(--楓糖金)">鬆餅之城 MuffinRP</span></h1>
             <div class="stats-container" data-aos="fade-up">
-                <div class="stat-item">
-                    <span>伺服器狀態</span>
-                    <strong id="server-status">連線中...</strong>
-                </div>
-                <div class="stat-item">
-                    <span>目前遊戲人數</span>
-                    <strong id="server-players">0 / 0</strong>
-                </div>
-                <div class="stat-item">
-                    <span>Discord 社群總人數</span>
-                    <strong id="dc-members">-- 人</strong>
-                </div>
+                <div class="stat-item"><span>伺服器狀態</span><strong id="server-status">連線中...</strong></div>
+                <div class="stat-item"><span>目前遊戲人數</span><strong id="server-players">0 / 0</strong></div>
+                <div class="stat-item"><span>Discord 社群總人數</span><strong id="dc-members">-- 人</strong></div>
             </div>
         </div>
     </section>
 
     <section id="jobs">
-        <h2 style="text-align: center; margin-bottom: 40px;">🏙️ MuffinRP 職業體系</h2>
+        <span class="section-tag" data-aos="fade-up">CITY OCCUPATIONS</span>
+        <h2 class="section-title" data-aos="fade-up">🏙️ 城市職業體系</h2>
         <div class="job-grid">
-            <div class="job-card" data-aos="zoom-in"><div class="job-icon">🛡️</div><h3>警政局</h3><p>維護秩序，守護 MuffinRP 的安寧。</p></div>
-            <div class="job-card" data-aos="zoom-in" data-aos-delay="100"><div class="job-icon">🚑</div><h3>醫政局</h3><p>最即時的救治，守護公民生命。</p></div>
-            <div class="job-card" data-aos="zoom-in" data-aos-delay="200"><div class="job-icon">🔧</div><h3>修車廠</h3><p>精密維修，工業核心的支撐。</p></div>
-            <div class="job-card" data-aos="zoom-in" data-aos-delay="300"><div class="job-icon">🍳</div><h3>餐廳</h3><p>用溫暖的料理，補給你的靈魂。</p></div>
+            <div class="job-card" data-aos="zoom-in"><h3>🚓 警政局</h3><p>維護秩序，守護正義的最後一道防線。</p></div>
+            <div class="job-card" data-aos="zoom-in" data-aos-delay="100"><h3>🚑 醫政局</h3><p>專業救治，守護每一位公民的生命健康。</p></div>
+            <div class="job-card" data-aos="zoom-in" data-aos-delay="200"><h3>🔧 精密修車廠</h3><p>工業核心，讓每一台引擎煥發新生。</p></div>
+            <div class="job-card" data-aos="zoom-in" data-aos-delay="300"><h3>🍽️ 楓糖餐廳</h3><p>美味補給，用料理溫暖每一位旅人的心。</p></div>
+        </div>
+    </section>
+
+    <section id="museum" style="background: #fffcf5;">
+        <span class="section-tag" data-aos="fade-up">MEMORIES</span>
+        <h2 class="section-title" data-aos="fade-up">🏛️ 鬆餅紀念館</h2>
+        <div class="gallery-grid">
+            <div class="polaroid" data-aos="fade-right">
+                <div class="img-placeholder"><i class="fas fa-camera" style="opacity:0.2;"></i></div>
+                <p># 我們的起點</p>
+            </div>
+            <div class="polaroid" data-aos="fade-left">
+                <div class="img-placeholder"><i class="fas fa-camera" style="opacity:0.2;"></i></div>
+                <p># 警政署合影</p>
+            </div>
+            <div class="polaroid" data-aos="fade-right" data-aos-delay="100">
+                <div class="img-placeholder"><i class="fas fa-camera" style="opacity:0.2;"></i></div>
+                <p># 楓糖餐敘</p>
+            </div>
+            <div class="polaroid" data-aos="fade-left" data-aos-delay="100">
+                <div class="img-placeholder"><i class="fas fa-camera" style="opacity:0.2;"></i></div>
+                <p># 引擎之美</p>
+            </div>
         </div>
     </section>
 
@@ -95,12 +146,10 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init({ duration: 800, once: true });
-        
         const cfxId = "yg64y5";
-        const discordId = "1457223135463080019"; 
+        const inviteCode = "EaDkCGP9bH"; 
 
         async function updateStats() {
-            // 抓取 FiveM 人數
             try {
                 const svRes = await fetch(`https://servers-frontend.fivem.net/api/servers/single/${cfxId}`);
                 if (svRes.ok) {
@@ -110,17 +159,14 @@
                     document.getElementById('server-players').innerText = `${data.Data.clients} / ${data.Data.sv_maxclients}`;
                 }
             } catch (e) { document.getElementById('server-status').innerText = "維護中"; }
-
-            // 抓取 Discord 總人數 (Guild ID 版)
             try {
-                const dcRes = await fetch(`https://api.discordtools.io/v1/guild/${discordId}`);
+                const dcRes = await fetch(`https://discord.com/api/v9/invites/${inviteCode}?with_counts=true`);
                 const dcData = await dcRes.json();
                 if (dcData && dcData.approximate_member_count) {
                     document.getElementById('dc-members').innerText = dcData.approximate_member_count + " 人";
                 }
-            } catch (e) { document.getElementById('dc-members').innerText = "點擊加入"; }
+            } catch (e) { document.getElementById('dc-members').innerText = "獲取中..."; }
         }
-        
         updateStats();
         setInterval(updateStats, 30000);
     </script>
