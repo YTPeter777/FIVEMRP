@@ -1,1 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🥞 鬆餅之城 RP｜MuffinRP</title>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&family=Montserrat:wght@800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --主題粉: #f9a8d4;
+            --背景粉白: #fff5f7; 
+            --文字焦糖: #5d4037;
+            --連線綠: #2ecc71;
+            --卡片影: 0 10px 30px rgba(249, 168, 212, 0.1);
+        }
+        * { box-sizing: border-box; scroll-behavior: smooth; }
+        body { margin: 0; font-family: 'Noto Sans TC', sans-serif; background: var(--背景粉白); color: var(--文字焦糖); overflow-x: hidden; }
+        
+        nav { position: sticky; top: 0; width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 15px 8%; background: rgba(255,255,255,0.8); backdrop-filter: blur(20px); z-index: 1000; border-bottom: 1px solid rgba(249, 168, 212, 0.2); }
+        .logo-group { display: flex; align-items: center; gap: 12px; }
+        .logo-img { height: 45px; }
+        .nav-btns { display: flex; gap: 10px; }
+        .btn-nav { padding: 8px 20px; border-radius: 50px; font-size: 0.85rem; text-decoration: none; font-weight: bold; transition: 0.3s; }
+        .btn-white { background: white; color: var(--文字焦糖); border: 1px solid #eee; }
+        .btn-pink { background: var(--主題粉); color: white; }
+
+        section { padding: 80px 8%; }
+        .hero { display: flex; flex-direction: column; align-items: flex-start; max-width: 1200px; margin: 0 auto; }
+        .hero h1 { font-family: 'Montserrat', sans-serif; font-size: 4rem; margin: 0; line-height: 1; letter-spacing: -2px; }
+        
+        .stats-wrapper { width: 100%; max-width: 500px; margin-top: 40px; display: flex; flex-direction: column; gap: 15px; }
+        
+        /* 數據卡片樣式 */
+        .stat-card {
+            background: white; padding: 20px 25px; border-radius: 20px;
+            box-shadow: var(--卡片影); display: flex; flex-direction: column; transition: 0.3s;
+        }
+        .stat-card span { font-size: 0.85rem; color: #999; font-weight: bold; margin-bottom: 8px; }
+        .stat-card strong { font-size: 2.2rem; color: #333; font-weight: 900; display: flex; align-items: baseline; gap: 5px; }
+        .stat-card strong small { font-size: 1rem; color: #bbb; }
+
+        /* 呼吸燈 */
+        .status-dot { width: 10px; height: 10px; background: var(--連線綠); border-radius: 50%; display: inline-block; margin-right: 8px; box-shadow: 0 0 10px var(--連線綠); animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+
+        /* 所有卡片下方會動的文字樣式 */
+        .dynamic-subtext { 
+            font-size: 0.9rem; 
+            color: #bbb; 
+            margin-top: 5px; 
+            font-weight: 500; 
+            transition: opacity 0.5s ease; 
+            min-height: 1.2rem;
+        }
+
+        .btn-play-large {
+            display: inline-flex; align-items: center; gap: 10px;
+            background: linear-gradient(90deg, #f9a8d4, #f472b6);
+            color: white; padding: 12px 35px; border-radius: 50px;
+            text-decoration: none; font-weight: 900; font-size: 1.1rem;
+            margin-top: 25px; box-shadow: 0 8px 20px rgba(249, 168, 212, 0.4);
+            transition: 0.3s;
+        }
+        .btn-play-large:hover { transform: translateY(-3px) scale(1.02); }
+
+        footer { text-align: center; padding: 60px; color: #bbb; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo-group">
+            <img src="https://i.imgur.com/vH9v5mN.png" class="logo-img">
+            <strong>🥞 鬆餅之城 RP</strong>
+        </div>
+        <div class="nav-btns">
+            <a href="https://discord.gg/EaDkCGP9bH" class="btn-nav btn-white">Discord</a>
+            <a href="fivem://connect/yg64y5" class="btn-nav btn-pink">一鍵連線</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div data-aos="fade-up">
+            <h1>PANCAKE CITY<br><span style="color:var(--主題粉)">STORY LIFE.</span></h1>
+        </div>
+
+        <div class="stats-wrapper" data-aos="fade-up" data-aos-delay="200">
+            <div class="stat-card">
+                <span>伺服器狀態</span>
+                <strong id="server-status"><span class="status-dot"></span>偵測中</strong>
+                <div id="text-status" class="dynamic-subtext">正在準備美味鬆餅...</div>
+            </div>
+
+            <div class="stat-card">
+                <span>目前在線</span>
+                <strong><span id="player-count">0</span><small>/ 10</small></strong>
+                <div id="text-players" class="dynamic-subtext">每一位玩家都是我們的蜂蜜...</div>
+            </div>
+
+            <div class="stat-card">
+                <span>Discord 群組</span>
+                <strong><span id="member-count">---</span><small>位成員</small></strong>
+                <div id="text-discord" class="dynamic-subtext">歡迎加入大家庭...</div>
+            </div>
+
+            <a href="fivem://connect/yg64y5" class="btn-play-large">
+                <span>🍭 進城玩</span>
+            </a>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 🥞 鬆餅之城 RP. 品味每一口故事。</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1000, once: true });
+        
+        const cfxId = "yg64y5"; 
+        const inviteCode = "EaDkCGP9bH"; 
+
+        // 分類定義輪播文字清單
+        const quotes = {
+            status: ["現在很舒服", "伺服器正在深呼吸", "又是充滿糖粉的一天", "鬆餅香味飄散中", "來口鬆餅，忘掉煩惱"],
+            players: ["在線人數會自動更新", "大家都聚在楓糖餐廳呢", "聽說工業區又有新的驚喜", "今天的陽光很適合配蜂蜜", "城裡的爐火正旺"],
+            discord: ["目前已開放玩家加入", "社群夥伴正在等你", "最新活動公告都在這", "點擊上方加入 Discord", "溫馨的小城，大大的回憶"]
+        };
+
+        // 輪播文字控制
+        function rotateAllTexts() {
+            const categories = ['status', 'players', 'discord'];
+            categories.forEach(cat => {
+                const el = document.getElementById(`text-${cat}`);
+                el.style.opacity = 0;
+                setTimeout(() => {
+                    const list = quotes[cat];
+                    el.innerText = list[Math.floor(Math.random() * list.length)];
+                    el.style.opacity = 1;
+                }, 500);
+            });
+        }
+        setInterval(rotateAllTexts, 5000); // 每 5 秒全卡片文字同步換一次
+
+        // 數字跳動動畫
+        function animateValue(id, start, end, duration) {
+            if (start === end) return;
+            const obj = document.getElementById(id);
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                obj.innerText = Math.floor(progress * (end - start) + start);
+                if (progress < 1) window.requestAnimationFrame(step);
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        let lastPlayers = 0;
+        let lastMembers = 0;
+
+        async function updateStats() {
+            try {
+                const svRes = await fetch(`https://servers-frontend.fivem.net/api/servers/single/${cfxId}`);
+                if (svRes.ok) {
+                    const data = await svRes.json();
+                    document.getElementById('server-status').innerHTML = '<span class="status-dot"></span>開放中';
+                    animateValue("player-count", lastPlayers, data.Data.clients, 1000);
+                    lastPlayers = data.Data.clients;
+                }
+            } catch (e) {
+                document.getElementById('server-status').innerText = "未開放";
+            }
+
+            try {
+                const dcRes = await fetch(`https://discord.com/api/v9/invites/${inviteCode}?with_counts=true`);
+                const dcData = await dcRes.json();
+                if (dcData && dcData.approximate_member_count) {
+                    animateValue("member-count", lastMembers, dcData.approximate_member_count, 1000);
+                    lastMembers = dcData.approximate_member_count;
+                }
+            } catch (e) { }
+        }
+
+        updateStats();
+        setInterval(updateStats, 30000); 
+    </script>
+</body>
+</html>
 
