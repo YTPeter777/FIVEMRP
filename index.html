@@ -12,9 +12,8 @@
     <style>
         :root {
             --主題粉: #f9a8d4;
-            --背景粉白: #fff5f7; 
             --文字焦糖: #5d4037;
-            --連線綠: #2ecc71;
+            --背景粉白: #fff5f7;
             --卡片影: 0 10px 30px rgba(249, 168, 212, 0.15);
         }
 
@@ -27,28 +26,53 @@
             overflow-x: hidden;
         }
 
-        /* --- 導覽列 --- */
+        /* 1. 導覽列：純淨無 Logo 版 */
         nav { 
-            position: sticky; top: 0; width: 100%; display: flex; justify-content: space-between; align-items: center; 
-            padding: 15px 8%; background: rgba(255,255,255,0.85); backdrop-filter: blur(20px); 
-            z-index: 1000; border-bottom: 1px solid rgba(249, 168, 212, 0.2); 
+            display: flex; 
+            justify-content: flex-end; 
+            padding: 20px 8%; 
+            background: transparent; 
+            position: absolute;
+            width: 100%;
+            z-index: 100;
         }
-        .logo-group { display: flex; align-items: center; gap: 12px; }
-        .logo-img { height: 45px; }
-        .nav-btns { display: flex; gap: 10px; }
-        .btn-nav { padding: 8px 20px; border-radius: 50px; font-size: 0.85rem; text-decoration: none; font-weight: bold; transition: 0.3s; }
+        .btn-nav { 
+            padding: 10px 24px; 
+            border-radius: 50px; 
+            font-size: 0.85rem; 
+            text-decoration: none; 
+            font-weight: bold; 
+            transition: 0.3s;
+            margin-left: 10px;
+        }
         .btn-white { background: white; color: var(--文字焦糖); border: 1px solid #eee; }
         .btn-pink { background: var(--主題粉); color: white; border: none; cursor: pointer; }
 
-        /* --- Hero 區塊 --- */
-        section { padding: 80px 8%; }
-        .hero { display: flex; flex-direction: column; align-items: flex-start; max-width: 1200px; margin: 0 auto; }
-        .hero h1 { font-family: 'Montserrat', sans-serif; font-size: clamp(2.5rem, 8vw, 4.5rem); margin: 0; line-height: 1.1; letter-spacing: -2px; }
+        /* 2. 主視覺與介紹區塊 */
+        section { padding: 120px 8% 60px 8%; max-width: 1200px; margin: 0 auto; }
+        
+        .hero-title { 
+            font-family: 'Montserrat', sans-serif; 
+            font-size: clamp(2.5rem, 8vw, 4.2rem); 
+            line-height: 1.1; 
+            letter-spacing: -2px; 
+            margin: 0 0 20px 0; 
+        }
+        .hero-title span { color: var(--主題粉); }
 
-        /* --- 數據看板 --- */
-        .stats-wrapper { width: 100%; max-width: 500px; margin-top: 40px; display: flex; flex-direction: column; gap: 18px; }
+        .hero-desc { 
+            max-width: 600px; 
+            font-size: 1.15rem; 
+            line-height: 1.8; 
+            color: #8a7a75; 
+            margin-bottom: 45px; 
+            font-weight: 500;
+        }
+
+        /* 3. 數據看板（具備自動換字功能） */
+        .stats-wrapper { width: 100%; max-width: 500px; display: flex; flex-direction: column; gap: 18px; }
         .stat-card {
-            background: white; padding: 22px 28px; border-radius: 25px;
+            background: white; padding: 25px 30px; border-radius: 25px;
             box-shadow: var(--卡片影); display: flex; flex-direction: column; transition: 0.4s;
         }
         .stat-card:hover { transform: translateX(10px); }
@@ -56,66 +80,65 @@
         .stat-card strong { font-size: 2.3rem; color: #333; font-weight: 900; display: flex; align-items: baseline; gap: 8px; }
         .stat-card strong small { font-size: 1.1rem; color: #bbb; }
 
-        .status-dot { width: 12px; height: 12px; background: var(--連線綠); border-radius: 50%; display: inline-block; margin-right: 10px; box-shadow: 0 0 12px var(--連線綠); animation: pulse 2s infinite; }
-        @keyframes pulse { 0% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(0.9); } 100% { opacity: 1; transform: scale(1); } }
-
-        .dynamic-subtext { font-size: 0.95rem; color: #aaa; margin-top: 6px; font-weight: 500; transition: opacity 0.5s ease; min-height: 1.2rem; }
+        /* 您要求的：會更換的動態文字樣式 */
+        .dynamic-subtext { 
+            font-size: 0.95rem; 
+            color: var(--主題粉); 
+            margin-top: 8px; 
+            font-weight: 500; 
+            transition: opacity 0.5s ease; 
+            min-height: 1.2rem;
+            letter-spacing: 0.5px;
+        }
 
         .btn-play-large {
             display: inline-flex; align-items: center; gap: 12px;
             background: linear-gradient(90deg, #f9a8d4, #f472b6);
-            color: white; padding: 15px 40px; border-radius: 50px;
+            color: white; padding: 16px 45px; border-radius: 50px;
             text-decoration: none; font-weight: 900; font-size: 1.2rem;
-            margin-top: 25px; box-shadow: 0 10px 25px rgba(249, 168, 212, 0.4);
+            margin-top: 30px; box-shadow: 0 10px 25px rgba(249, 168, 212, 0.4);
             transition: 0.3s;
         }
-        .btn-play-large:hover { transform: translateY(-5px) scale(1.03); }
+        .btn-play-large:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(249, 168, 212, 0.5); }
 
-        /* --- 公職介紹區 --- */
-        .job-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 40px; }
-        .job-card { background: white; padding: 35px; border-radius: 35px; box-shadow: var(--卡片影); transition: 0.3s; position: relative; }
-        .job-card:hover { transform: translateY(-10px); }
-        .job-card h3 { font-size: 1.6rem; margin-bottom: 12px; border-left: 6px solid var(--主題粉); padding-left: 15px; color: #333; }
-        .job-tag { padding: 4px 12px; border-radius: 50px; font-size: 0.75rem; font-weight: 900; }
-
-        /* --- 鬆餅博物館 --- */
+        /* 4. 鬆餅博物館（移至底部） */
+        #museum { background: #fffcf5; padding: 100px 8%; border-top: 1px solid rgba(0,0,0,0.03); }
+        .museum-container { 
+            display: flex; gap: 30px; overflow-x: auto; 
+            padding: 20px 0 50px 0; scroll-snap-type: x mandatory; 
+            -webkit-overflow-scrolling: touch;
+        }
         .museum-container::-webkit-scrollbar { display: none; }
         .polaroid { 
             flex: 0 0 280px; scroll-snap-align: center; background: white; 
-            padding: 15px 15px 40px 15px; box-shadow: 0 15px 35px rgba(120, 69, 19, 0.1); 
+            padding: 15px 15px 40px 15px; box-shadow: 0 15px 35px rgba(120, 69, 19, 0.08); 
             border-radius: 2px; transition: 0.4s; transform: rotate(var(--r));
         }
-        .polaroid:hover { 
-            transform: rotate(0deg) translateY(-15px) scale(1.05) !important; 
-            z-index: 10; box-shadow: 0 25px 50px rgba(120, 69, 19, 0.2) !important;
-        }
+        .polaroid:hover { transform: rotate(0deg) translateY(-15px); z-index: 10; }
 
-        footer { text-align: center; padding: 60px; color: #bbb; font-size: 0.9rem; border-top: 1px solid #eee; background: white; }
+        footer { text-align: center; padding: 60px; color: #bbb; font-size: 0.85rem; }
     </style>
 </head>
 <body>
 
     <nav>
-        <div class="logo-group">
-            <img src="https://i.imgur.com/vH9v5mN.png" class="logo-img" alt="Logo">
-            <strong>🥞 鬆餅之城 RP</strong>
-        </div>
-        <div class="nav-btns">
-            <a href="https://discord.gg/EaDkCGP9bH" class="btn-nav btn-white">Discord</a>
-            <a href="fivem://connect/yg64y5" class="btn-nav btn-pink">一鍵連線</a>
-        </div>
+        <a href="https://discord.gg/EaDkCGP9bH" class="btn-nav btn-white">Discord</a>
+        <a href="fivem://connect/yg64y5" class="btn-nav btn-pink">一鍵連線</a>
     </nav>
 
-    <section class="hero">
+    <section>
         <div data-aos="fade-up">
-            <h1>PANCAKE CITY<br><span style="color:var(--主題粉)">STORY LIFE.</span></h1>
+            <h1 class="hero-title">PANCAKE CITY<br><span>STORY LIFE.</span></h1>
+            <p class="hero-desc">
+                在這裡，每一塊鬆餅都藏著一個故事。我們致力於打造一個溫馨、真實且充滿無限可能的角色扮演環境。無論你是想維持秩序的警員，還是追求速度的改裝手，鬆餅之城都有你的專屬座位。
+            </p>
         </div>
 
         <div class="stats-wrapper" data-aos="fade-up" data-aos-delay="200">
             <div class="stat-card">
                 <span>伺服器狀態</span>
-                <strong id="server-status"><span class="status-dot"></span>偵測中</strong>
-                <div id="text-status" class="dynamic-subtext">正在烘焙鬆餅中...</div>
+                <strong id="server-status">偵測中...</strong>
+                <div id="text-status" class="dynamic-subtext">正在烘焙美味鬆餅...</div>
             </div>
 
             <div class="stat-card">
@@ -127,7 +150,7 @@
             <div class="stat-card">
                 <span>Discord 群組</span>
                 <strong><span id="member-count">---</span><small>位成員</small></strong>
-                <div id="text-discord" class="dynamic-subtext">社群夥伴正等你來玩...</div>
+                <div id="text-discord" class="dynamic-subtext">歡迎加入鬆餅大家庭...</div>
             </div>
 
             <a href="fivem://connect/yg64y5" class="btn-play-large">
@@ -136,84 +159,33 @@
         </div>
     </section>
 
-    <section id="jobs" style="background: white;">
-        <div style="text-align: center; margin-bottom: 50px;" data-aos="fade-up">
-            <span style="color: var(--主題粉); font-weight: 900; letter-spacing: 2px;">GOVERNMENT & JOBS</span>
-            <h2 style="font-size: 2.8rem; font-weight: 900; margin-top: 10px;">🏙️ 城市公職招募中</h2>
-        </div>
-
-        <div class="job-grid">
-            <div class="job-card" data-aos="fade-up">
-                <div style="display:flex; justify-content:space-between; margin-bottom:15px;">
-                    <div style="font-size:2rem;">🚓</div>
-                    <span class="job-tag" style="background:#e1f5fe; color:#0288d1;">穩定招募</span>
-                </div>
-                <h3>警政署 (P.D.)</h3>
-                <p style="color:#666; font-size:0.9rem; line-height:1.6;">維持城市秩序與交通安全。我們需要具備卓越判斷力的夥伴，共同打擊犯罪。</p>
-            </div>
-
-            <div class="job-card" data-aos="fade-up" data-aos-delay="100">
-                <div style="display:flex; justify-content:space-between; margin-bottom:15px;">
-                    <div style="font-size:2rem;">🚑</div>
-                    <span class="job-tag" style="background:#fff1f0; color:#f5222d;">急缺人才</span>
-                </div>
-                <h3>醫務局 (E.M.S.)</h3>
-                <p style="color:#666; font-size:0.9rem; line-height:1.6;">醫務人員是城市中最暖心的存在，我們提供專業設備與完備的救護訓練。</p>
-            </div>
-
-            <div class="job-card" data-aos="fade-up" data-aos-delay="200">
-                <div style="display:flex; justify-content:space-between; margin-bottom:15px;">
-                    <div style="font-size:2rem;">🔧</div>
-                    <span class="job-tag" style="background:#f6ffed; color:#52c41a;">開放實習</span>
-                </div>
-                <h3>工業核心修車廠</h3>
-                <p style="color:#666; font-size:0.9rem; line-height:1.6;">引擎靈魂的棲息地。無論性能改裝或損修，技術員確保車輛完美奔馳。</p>
-            </div>
-
-            <div class="job-card" data-aos="fade-up" data-aos-delay="300">
-                <div style="display:flex; justify-content:space-between; margin-bottom:15px;">
-                    <div style="font-size:2rem;">🏛️</div>
-                    <span class="job-tag" style="background:#fff7e6; color:#fa8c16;">精英招募</span>
-                </div>
-                <h3>行政市政廳</h3>
-                <p style="color:#666; font-size:0.9rem; line-height:1.6;">規劃城市未來，制定法規。從申辦到授權，市政廳是城市運作的最強大腦。</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="museum" style="background: #fffcf5; padding: 80px 8% 60px 8%;">
-        <div style="text-align: center; margin-bottom: 40px;">
-            <span style="color: var(--主題粉); font-weight: 900; letter-spacing: 2px;">CITY MEMORIES</span>
-            <h2 style="font-size: 2.5rem; font-weight: 900;">🏛️ 鬆餅博物館</h2>
+    <section id="museum">
+        <div style="text-align: center; margin-bottom: 50px;">
+            <span style="color: var(--主題粉); font-weight: 900; letter-spacing: 2px; display: block; margin-bottom: 10px;">MEMORIES</span>
+            <h2 style="font-size: 2.5rem; font-weight: 900; margin: 0;">🏛️ 鬆餅博物館</h2>
         </div>
         
-        <div class="museum-container" style="width: 100%; overflow-x: auto; display: flex; gap: 25px; scroll-snap-type: x mandatory; padding-bottom: 30px;">
+        <div class="museum-container">
             <div class="polaroid" style="--r: -2deg;">
-                <div style="width: 100%; aspect-ratio: 1/1; background: #fdf2e9; display: flex; align-items: center; justify-content: center; margin-bottom: 15px; border: 1px solid #f0f0f0; overflow: hidden;">
+                <div style="width: 100%; aspect-ratio: 1/1; background: #fdf2e9; display: flex; align-items: center; justify-content: center; margin-bottom: 15px; border: 1px solid #f0f0f0;">
                     <img src="YOUR_IMG_1" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.parentElement.innerHTML='<i class=\'fas fa-camera\' style=\'opacity:0.2; font-size:3rem;\'></i>'">
                 </div>
-                <p style="text-align: center; font-weight: 700; color:var(--文字焦糖);"># 我們的起點</p>
+                <p style="text-align: center; font-weight: 700;"># 我們的起點</p>
             </div>
             <div class="polaroid" style="--r: 3deg;">
-                <div style="width: 100%; aspect-ratio: 1/1; background: #fdf2e9; display: flex; align-items: center; justify-content: center; margin-bottom: 15px; border: 1px solid #f0f0f0; overflow: hidden;">
+                <div style="width: 100%; aspect-ratio: 1/1; background: #fdf2e9; display: flex; align-items: center; justify-content: center; margin-bottom: 15px; border: 1px solid #f0f0f0;">
                     <img src="YOUR_IMG_2" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.parentElement.innerHTML='<i class=\'fas fa-camera\' style=\'opacity:0.2; font-size:3rem;\'></i>'">
                 </div>
-                <p style="text-align: center; font-weight: 700; color:var(--文字焦糖);"># 警政署合影</p>
+                <p style="text-align: center; font-weight: 700;"># 警政署合影</p>
             </div>
             <div class="polaroid" style="--r: -3deg;">
-                <div style="width: 100%; aspect-ratio: 1/1; background: #fdf2e9; display: flex; align-items: center; justify-content: center; margin-bottom: 15px; border: 1px solid #f0f0f0; overflow: hidden;">
+                <div style="width: 100%; aspect-ratio: 1/1; background: #fdf2e9; display: flex; align-items: center; justify-content: center; margin-bottom: 15px; border: 1px solid #f0f0f0;">
                     <img src="YOUR_IMG_3" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.parentElement.innerHTML='<i class=\'fas fa-camera\' style=\'opacity:0.2; font-size:3rem;\'></i>'">
                 </div>
-                <p style="text-align: center; font-weight: 700; color:var(--文字焦糖);"># 楓糖餐敘</p>
-            </div>
-            <div class="polaroid" style="--r: 2deg;">
-                <div style="width: 100%; aspect-ratio: 1/1; background: #fdf2e9; display: flex; align-items: center; justify-content: center; margin-bottom: 15px; border: 1px solid #f0f0f0; overflow: hidden;">
-                    <img src="YOUR_IMG_4" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.parentElement.innerHTML='<i class=\'fas fa-camera\' style=\'opacity:0.2; font-size:3rem;\'></i>'">
-                </div>
-                <p style="text-align: center; font-weight: 700; color:var(--文字焦糖);"># 引擎之美</p>
+                <p style="text-align: center; font-weight: 700;"># 楓糖餐敘</p>
             </div>
         </div>
-        <p style="text-align: center; color: #ccc; font-size: 0.85rem;"><i class="fas fa-arrows-left-right"></i> 左右滑動查看更多</p>
+        <p style="text-align: center; color: #ccc; font-size: 0.9rem; margin-top: 20px;">( 左右滑動查看回憶 )</p>
     </section>
 
     <footer>
@@ -224,68 +196,52 @@
     <script>
         AOS.init({ duration: 1000, once: true });
         
-        const cfxId = "yg64y5"; 
-        const inviteCode = "EaDkCGP9bH"; 
-
-        // 輪播文字清單 (會自動更換)
+        // --- 1. 自動更換文字功能 ---
         const quotes = {
-            status: ["現在很舒服", "伺服器正在深呼吸", "又是充滿糖粉的一天", "鬆餅香味飄散中", "來口鬆餅忘掉煩惱", "爐火正旺，等你入城"],
-            players: ["人數會自動更新", "大家都聚在楓糖餐廳呢", "聽說工業區又有驚喜", "今天的陽光適合配蜂蜜", "城裡熱鬧滾滾", "這裡總有你的位置"],
-            discord: ["開放加入中", "社群夥伴正等你打招呼", "最新公告都在這", "點擊上方加入大家庭", "溫暖的小城，溫馨的群組"]
+            status: ["現在很舒服", "伺服器正在深呼吸", "又是充滿糖粉的一天", "鬆餅香味飄散中", "來口鬆餅，忘掉煩惱"],
+            players: ["在線人數自動更新", "大家都聚在餐廳呢", "聽說工業區有驚喜", "今天的陽光很配蜂蜜"],
+            discord: ["目前已開放加入", "社群夥伴在等你", "最新活動都在這", "歡迎加入大家庭"]
         };
 
-        function rotateAllTexts() {
+        function rotateTexts() {
             ['status', 'players', 'discord'].forEach(cat => {
                 const el = document.getElementById(`text-${cat}`);
-                if(!el) return;
+                if (!el) return;
                 el.style.opacity = 0;
                 setTimeout(() => {
-                    const list = quotes[cat];
-                    el.innerText = list[Math.floor(Math.random() * list.length)];
+                    el.innerText = quotes[cat][Math.floor(Math.random() * quotes[cat].length)];
                     el.style.opacity = 1;
                 }, 500);
             });
         }
-        setInterval(rotateAllTexts, 5000); 
+        setInterval(rotateTexts, 5000); // 每 5 秒換一次
 
-        function animateValue(id, start, end, duration) {
-            const obj = document.getElementById(id);
-            if (!obj || start === end) return;
-            let startTimestamp = null;
-            const step = (timestamp) => {
-                if (!startTimestamp) startTimestamp = timestamp;
-                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-                obj.innerText = Math.floor(progress * (end - start) + start);
-                if (progress < 1) window.requestAnimationFrame(step);
-            };
-            window.requestAnimationFrame(step);
-        }
-
-        let lastPlayers = 0, lastMembers = 0;
+        // --- 2. 伺服器偵測功能 ---
+        const cfxId = "yg64y5";
+        const inviteCode = "EaDkCGP9bH";
 
         async function updateStats() {
+            // FiveM 偵測
             try {
                 const svRes = await fetch(`https://servers-frontend.fivem.net/api/servers/single/${cfxId}`);
                 if (svRes.ok) {
                     const data = await svRes.json();
-                    document.getElementById('server-status').innerHTML = '<span class="status-dot"></span>開放中';
-                    animateValue("player-count", lastPlayers, data.Data.clients, 1000);
-                    lastPlayers = data.Data.clients;
+                    document.getElementById('server-status').innerText = "開放中";
+                    document.getElementById('player-count').innerText = data.Data.clients;
                 }
-            } catch (e) { document.getElementById('server-status').innerText = "未開放"; }
+            } catch (e) { document.getElementById('server-status').innerText = "連線異常"; }
 
+            // Discord 偵測
             try {
                 const dcRes = await fetch(`https://discord.com/api/v9/invites/${inviteCode}?with_counts=true`);
                 const dcData = await dcRes.json();
                 if (dcData && dcData.approximate_member_count) {
-                    animateValue("member-count", lastMembers, dcData.approximate_member_count, 1000);
-                    lastMembers = dcData.approximate_member_count;
+                    document.getElementById('member-count').innerText = dcData.approximate_member_count;
                 }
             } catch (e) { }
         }
-
         updateStats();
-        setInterval(updateStats, 30000); 
+        setInterval(updateStats, 30000); // 每 30 秒更新一次數據
     </script>
 </body>
 </html>
